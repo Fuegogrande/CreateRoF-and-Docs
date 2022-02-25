@@ -44,26 +44,27 @@ while subluxations == '':
 see_attached = input("See attached (Y/N)?")
 # Get treatment phases
 """treatment_phases = [document.paragraphs[12].text, document.paragraphs[22].text, document.paragraphs[32].text]"""
-treatment_phases = []
-x = 1
-y = 0
+if see_attached != 'y' or see_attached != 'Y':
+    treatment_phases = []
+    x = 1
+    y = 0
 
-all_paras = document.paragraphs
-doc_length = len(all_paras)
-while x < 4:
+    all_paras = document.paragraphs
+    doc_length = len(all_paras)
+    while x < 4:
 
-    while len(treatment_phases) < 3:
-        paragraph = document.paragraphs[y]
-        check3 = paragraph.text
-        if check3.find("per week") > 0:
-            treatment_phases.append(document.paragraphs[y].text)
-            print(document.paragraphs[y].text)
-        print("Treatment Phases: " + str(treatment_phases) + str(len(treatment_phases)))
-        if y == doc_length-1:
-            break
-        y += 1
+        while len(treatment_phases) < 3:
+            paragraph = document.paragraphs[y]
+            check3 = paragraph.text
+            if check3.find("per week") > 0:
+                treatment_phases.append(document.paragraphs[y].text)
+                print(document.paragraphs[y].text)
+            print("Treatment Phases: " + str(treatment_phases) + str(len(treatment_phases)))
+            if y == doc_length-1:
+                break
+            y += 1
 
-    x += 1
+        x += 1
 
 blood_pressure = input("Blood pressure (XXX/XX): ")
 
