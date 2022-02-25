@@ -44,7 +44,7 @@ while subluxations == '':
 see_attached = input("See attached (Y/N)?")
 # Get treatment phases
 """treatment_phases = [document.paragraphs[12].text, document.paragraphs[22].text, document.paragraphs[32].text]"""
-if see_attached != 'y' or see_attached != 'Y':
+if see_attached != 'y' and see_attached != 'Y':
     treatment_phases = []
     x = 1
     y = 0
