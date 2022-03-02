@@ -12,9 +12,6 @@ file_number = input()
 document = Document('//192.168.0.14\platinum\Document\doc\{}\{}-Case Planning And Treatment Recommendations Worksheet-{}.docx'.format(folder_name, location_letters, file_number))
 
 # Find and save Objective Findings
-"""#paragraph = document.paragraphs[2]
-findings = paragraph.text
-findings = findings[25:]"""
 x = 0
 findings = ''
 while findings == '':
@@ -27,9 +24,6 @@ while findings == '':
 
 
 # Find and save Subluxations
-"""paragraph = document.paragraphs[8]
-subluxations = paragraph.text
-subluxations = subluxations[13:]"""
 x = 0
 subluxations = ''
 while subluxations == '':
@@ -154,7 +148,11 @@ font.bold = True
 # Last Page
 if see_attached.upper() == 'Y' or see_attached.upper() == 'YES':
     paragraph = document.paragraphs[153]
-    paragraph.add_run("SEE ATTACHED").bold = True
+    paragraph.add_run("SEE ATTACHED")
+    font = run.font
+    font.name = 'Arial'
+    font.size = Pt(12)
+    font.bold = True
 
 else:
     y = 0
