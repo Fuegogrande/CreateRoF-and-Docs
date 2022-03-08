@@ -9,7 +9,7 @@ date = input("What was the date of examination? (mm/dd/yyyy) ")
 
 print("Enter the Case Planning File number (usually 1): ")
 file_number = input()
-document = Document('//192.168.0.14\platinum\Document\doc\{}\{}-Case Planning And Treatment Recommendations Worksheet-{}.docx'.format(folder_name, location_letters, file_number))
+document = Document('//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-Case Planning And Treatment Recommendations Worksheet-{}.docx'.format(folder_name, location_letters, file_number))
 
 # Find and save Objective Findings
 x = 0
@@ -63,7 +63,7 @@ if see_attached != 'y' and see_attached != 'Y':
 blood_pressure = input("Blood pressure (XXX/XX): ")
 
 # Positive/Negative tests
-test_list = ["Formina Compression", "Jackson's Compression", "Spurling's", "Shoulder Compressioon", "Adson's Sign", "Nash Sign", "Valsalva", "Scapular Fixation", "Soto-Hall", "Kemp's Sign", "Trendelenburg", "Ely's", "Nachlas", "Goldthwaith's", "SLR, Braggards, WLR, Fajersztajn's", "Romberg's", "Minor's", "Patrick's Faber", "Supported Adams", "Bechiterew", "Gaenslen Buckling"]
+test_list = ["Formina Compression", "Jackson's Compression", "Spurling's", "Shoulder Compression", "Adson's Sign", "Nash Sign", "Valsalva", "Scapular Fixation", "Soto-Hall", "Kemp's Sign", "Trendelenburg", "Ely's", "Nachlas", "Goldthwaith's", "SLR, Braggards, WLR, Fajersztajn's", "Romberg's", "Minor's", "Patrick's Faber", "Supported Adams", "Bechiterew", "Gaenslen Buckling"]
 test_results = []
 
 print("Positive/Negative tests: Positive left = L, Positive Right = R, LR for Positive-Left and Right, P for Positive. Negative is anything else.")
@@ -92,7 +92,7 @@ for x in range(2):
 print(rom_list)
 
 # Create Report of Findings
-document = Document('//192.168.0.14\platinum\Document\Template\Report of Findings.DOCX')
+document = Document('//192.168.0.14\\platinum\\Document\\Template\\Report of Findings.DOCX')
 
 paragraph = document.paragraphs[12]
 run = paragraph.add_run(findings.upper())
@@ -168,10 +168,10 @@ else:
             font.bold = True
             y += 1
 
-document.save('//192.168.0.14\platinum\Document\doc\{}\{}-Report of Findings-1.docx'.format(folder_name, location_letters))
+document.save('//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-Report of Findings-1.docx'.format(folder_name, location_letters))
 
 # Create Questionnaire
-document = Document('S:\REPORTS\Revisions\Interim Re-exam Questionnaire.docx')
+document = Document('S:\\REPORTS\\Revisions\\Interim Re-exam Questionnaire.docx')
 
 table = document.tables[1]
 table.cell(0, 0).text = findings.upper()
@@ -182,11 +182,11 @@ tablecells = [1, 6, 8, 12, 16, 19]
 table = document.tables[2]
 for x in range(6):
     table.cell(tablecells[x], 1).text = enter_list[x]
-document.save('//192.168.0.14\platinum\Document\doc\{}\{}-Interim Re-exam Questionnaire-1.docx'.format(folder_name, location_letters))
+document.save('//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-Interim Re-exam Questionnaire-1.docx'.format(folder_name, location_letters))
 print("Questionnaire created")
 
 # Create Interim Report
-document = Document('//192.168.0.14\platinum\Document\Template\Interim Report One Page.DOCX')
+document = Document('//192.168.0.14\\platinum\\Document\\Template\\Interim Report One Page.DOCX')
 
 table = document.tables[0]
 table.cell(0, 0).text = date
@@ -197,11 +197,11 @@ for x in range(2, 15):
     if x != 8:
         table.cell(x, 1).text = rom_list[y]
         y += 1
-document.save('//192.168.0.14\platinum\Document\doc\{}\{}-Interim Report One Page-1.docx'.format(folder_name, location_letters))
+document.save('//192.168.0.14\\platinum\\Document\\doc\{}\\{}-Interim Report One Page-1.docx'.format(folder_name, location_letters))
 print("Interim Report 1 created")
 
 # Create Final Report
-document = Document('//192.168.0.14\platinum\Document\Template\Final Report With Spreadsheet.DOCX')
+document = Document('//192.168.0.14\\platinum\\Document\\Template\\Final Report With Spreadsheet.DOCX')
 
 table = document.tables[0]
 table.cell(0, 0).text = date
@@ -212,7 +212,7 @@ for x in range(2, 15):
     if x != 8:
         table.cell(x, 1).text = rom_list[y]
         y += 1
-document.save('//192.168.0.14\platinum\Document\doc\{}\{}-Final Report With Spreadsheet-1.docx'.format(folder_name, location_letters))
+document.save('//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-Final Report With Spreadsheet-1.docx'.format(folder_name, location_letters))
 print("Interim Report 1 created")
 
 print("Final Report created")
