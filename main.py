@@ -1,6 +1,14 @@
 from docx import Document
 from docx.enum.text import WD_ALIGN_PARAGRAPH
 from docx.shared import Pt
+from openpyxl import load_workbook
+from openpyxl import Workbook
+import win32com.client
+import PIL
+from PIL import ImageGrab, Image
+from docx.shared import Inches
+
+
 
 
 location_letters = input("What are the five letters of the filename starting with AA? ")
@@ -90,9 +98,45 @@ for x in range(2):
         rom = str(input(rom_description[i]))
         rom_list.append(rom)
 print(rom_list)
+# Create RoM Chart
+workbook = load_workbook('\\\\192.168.0.14\\platinum\\Document\\Template\\RoM for RoF.xlsx')
+sheet_1 = workbook['Sheet1']
+y=0
+for row in range(2, 15):
+    if row != 8:
+        measured = sheet_1.cell(row, 2)
+        temp = rom_list[int(y)]
+        measured.value = float(temp)
+        y += 1
+
+workbook.save('//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-RoM to RoF-1.xlsx'.format(folder_name, location_letters))
+
+# Create Chart Images
+chart_number = 0
+input_file = '//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-RoM to RoF-1.xlsx'.format(folder_name, location_letters)
+output_image1 = '//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-RoM Chart 1.png'.format(folder_name, location_letters)
+output_image2 = '//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-RoM Chart 2.png'.format(folder_name, location_letters)
+
+operation = win32com.client.Dispatch("Excel.Application")
+operation.Visible = 0
+operation.DisplayAlerts = 0
+workbook = operation.Workbooks.Open(input_file)
+sheet_1 = operation.Sheets(1)
+
+for x, chart in enumerate(sheet_1.Shapes):
+    chart.Copy()
+    image = ImageGrab.grabclipboard()
+    if x == 0:
+        image.save(output_image1, 'png')
+    else:
+        image.save(output_image2, 'png')
+    pass
+workbook.Close(True)
+operation.Quit()
 
 # Create Report of Findings
-document = Document('//192.168.0.14\\platinum\\Document\\Template\\Report of Findings.DOCX')
+#document = Document('//192.168.0.14\\platinum\\Document\\Template\\Report of Findings.DOCX')
+document = Document('//192.168.0.14\\platinum\\Document\\Template\\Report Of Findings (Rev. in progress).DOCX')
 
 paragraph = document.paragraphs[12]
 run = paragraph.add_run(findings.upper())
@@ -145,6 +189,25 @@ font.name = 'Arial'
 font.size = Pt(12)
 font.bold = True
 
+# Table Page
+table = document.tables[0]
+table.rows[0].cells[0].paragraphs[0].runs[0].font.bold = True
+table.rows[0].cells[0].paragraphs[0].runs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+y = 0
+for x in range(1, 14):
+    if x != 8:
+        table.cell(x, 1).text = rom_list[y]
+        y += 1
+
+"""document.add_picture('//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-RoM Chart 1.png'.format(folder_name, location_letters)width=Inches(7), height=Inches(4.21))
+document.add_picture('//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-RoM Chart 2.png'.format(folder_name, location_letters)width=Inches(7), height=Inches(4.21))
+"""
+
+p = document..paragraphs[118]
+r = p.add_run()
+
+r.add_picture('//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-RoM Chart 1.png'.format(folder_name, location_letters), width=Inches(5), height=Inches(3.01))
+r.add_picture('//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-RoM Chart 2.png'.format(folder_name, location_letters), width=Inches(5), height=Inches(3.01))
 # Last Page
 if see_attached.upper() == 'Y' or see_attached.upper() == 'YES':
     paragraph = document.paragraphs[153]
