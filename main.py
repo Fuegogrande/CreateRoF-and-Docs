@@ -195,7 +195,7 @@ table.rows[0].cells[0].paragraphs[0].runs[0].font.bold = True
 table.rows[0].cells[0].paragraphs[0].runs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
 y = 0
 for x in range(1, 14):
-    if x != 8:
+    if x != 7:
         table.cell(x, 1).text = rom_list[y]
         y += 1
 
@@ -203,7 +203,7 @@ for x in range(1, 14):
 document.add_picture('//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-RoM Chart 2.png'.format(folder_name, location_letters)width=Inches(7), height=Inches(4.21))
 """
 
-p = document..paragraphs[118]
+p = document.paragraphs[139]
 r = p.add_run()
 
 r.add_picture('//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-RoM Chart 1.png'.format(folder_name, location_letters), width=Inches(5), height=Inches(3.01))
@@ -230,6 +230,25 @@ else:
             font.size = Pt(12)
             font.bold = True
             y += 1
+
+# header
+sections = document.sections
+header = document.sections[1].header
+header.is_linked_to_previous = False
+paragraph = header.paragraphs[1]
+paragraph.text = "\t \t {}".format(date)
+paragraph.style = document.styles["Header"]
+header = document.sections[2].header
+header.is_linked_to_previous = False
+
+"""all_paras = header.paragraphs
+len(all_paras)
+x=0
+for para in all_paras:
+    print(x)
+    print(para.text)
+    print("-------")
+    x+=1"""
 
 document.save('//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-Report of Findings-1.docx'.format(folder_name, location_letters))
 
