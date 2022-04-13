@@ -211,7 +211,7 @@ r.add_picture('//192.168.0.14\\platinum\\Document\\doc\\{}\\{}-RoM Chart 2.png'.
 # Last Page
 if see_attached.upper() == 'Y' or see_attached.upper() == 'YES':
     paragraph = document.paragraphs[153]
-    paragraph.add_run("SEE ATTACHED")
+    run = paragraph.add_run("SEE ATTACHED")
     font = run.font
     font.name = 'Arial'
     font.size = Pt(12)
