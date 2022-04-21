@@ -1,5 +1,5 @@
 from docx import Document
-from docx.enum.text import WD_ALIGN_PARAGRAPH
+from docx.enum.text import WD_PARAGRAPH_ALIGNMENT
 from docx.shared import Pt
 from openpyxl import load_workbook
 from openpyxl import Workbook
@@ -192,7 +192,7 @@ font.bold = True
 # Table Page
 table = document.tables[0]
 table.rows[0].cells[0].paragraphs[0].runs[0].font.bold = True
-table.rows[0].cells[0].paragraphs[0].runs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+table.rows[0].cells[0].paragraphs[0].runs[0].alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 y = 0
 for x in range(1, 14):
     if x != 7:
@@ -273,7 +273,7 @@ document = Document('//192.168.0.14\\platinum\\Document\\Template\\Interim Repor
 table = document.tables[0]
 table.cell(0, 0).text = date
 table.rows[0].cells[0].paragraphs[0].runs[0].font.bold = True
-table.rows[0].cells[0].paragraphs[0].runs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+table.rows[0].cells[0].paragraphs[0].runs[0].alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 y = 0
 for x in range(2, 15):
     if x != 8:
@@ -288,7 +288,7 @@ document = Document('//192.168.0.14\\platinum\\Document\\Template\\Final Report 
 table = document.tables[0]
 table.cell(0, 0).text = date
 table.rows[0].cells[0].paragraphs[0].runs[0].font.bold = True
-table.rows[0].cells[0].paragraphs[0].runs[0].alignment = WD_ALIGN_PARAGRAPH.CENTER
+table.rows[0].cells[0].paragraphs[0].runs[0].alignment = WD_PARAGRAPH_ALIGNMENT.CENTER
 y = 0
 for x in range(2, 15):
     if x != 8:
